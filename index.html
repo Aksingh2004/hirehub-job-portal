@@ -1,231 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>HireHub — Find Your Next Job</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkIndia – Find Jobs in India</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:#080c14;color:#e8edf5;font-family:'Segoe UI',Arial,sans-serif;}
+  :root { --bg:#08101e; --card:#0d1626; --border:#162035; --text:#e8edf5; --muted:#6b7fa0; --blue:#3b7ef8; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',Arial,sans-serif; }
+  a { text-decoration:none; color:inherit; }
+  img { display:block; width:100%; }
 
-nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(8,12,20,.96);backdrop-filter:blur(10px);border-bottom:1px solid #141c28;display:flex;justify-content:space-between;align-items:center;padding:.85rem 4vw;}
-.logo{font-size:1.25rem;font-weight:900;color:#fff;}.logo span{color:#3b82f6;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{color:#7a8aaa;text-decoration:none;font-size:.83rem;transition:.2s;}
-.nav-links a:hover{color:#3b82f6;}
-.nav-right{display:flex;gap:.7rem;}
-.btn-ghost{background:transparent;color:#e8edf5;border:1px solid #1e2a3d;padding:.5rem 1.2rem;font-size:.8rem;border-radius:.4rem;cursor:pointer;transition:.2s;}
-.btn-ghost:hover{border-color:#3b82f6;color:#3b82f6;}
-.btn-blue{background:#3b82f6;color:#fff;border:none;padding:.5rem 1.2rem;font-size:.8rem;border-radius:.4rem;cursor:pointer;font-weight:600;transition:.2s;}
-.btn-blue:hover{background:#2563eb;}
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(8,16,30,0.97); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; padding:0.9rem 5%; }
+  .logo { font-size:1.2rem; font-weight:800; color:var(--blue); }
+  .logo span { color:var(--text); }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { font-size:0.83rem; color:var(--muted); transition:color 0.2s; }
+  .nav-links a:hover { color:var(--blue); }
+  .nav-right { display:flex; gap:0.7rem; }
+  .btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); padding:0.5rem 1.2rem; font-size:0.8rem; border-radius:5px; cursor:pointer; transition:0.2s; }
+  .btn-ghost:hover { border-color:var(--blue); }
+  .btn-blue { background:var(--blue); color:#fff; border:none; padding:0.5rem 1.3rem; font-size:0.8rem; font-weight:700; border-radius:5px; cursor:pointer; }
+  .hamburger { display:none; font-size:1.4rem; cursor:pointer; }
 
-#hero{min-height:100vh;display:flex;align-items:center;padding:6rem 4vw 4rem;background:radial-gradient(ellipse 70% 60% at 30% 50%,rgba(59,130,246,.07),transparent);}
-.hero-inner{max-width:720px;}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#60a5fa;font-size:.72rem;font-weight:600;padding:.3rem .9rem;border-radius:2rem;margin-bottom:1.5rem;}
-h1{font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:1.2rem;}
-h1 em{color:#3b82f6;font-style:normal;}
-.hero-p{color:#7a8aaa;font-size:1rem;line-height:1.75;max-width:520px;margin-bottom:2rem;}
-.search-wrap{background:#0d1420;border:1px solid #1e2a3d;border-radius:.6rem;padding:1rem;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.75rem;margin-bottom:2rem;max-width:780px;}
-.s-field{display:flex;flex-direction:column;gap:.3rem;}
-.s-label{font-size:.65rem;color:#7a8aaa;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
-.s-input{background:transparent;border:none;color:#e8edf5;font-size:.88rem;outline:none;}
-.s-input::placeholder{color:#3a4a5e;}
-.s-btn{background:#3b82f6;color:#fff;border:none;padding:.75rem 1.5rem;border-radius:.4rem;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;}
-.hero-tags{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;}
-.tag-label{font-size:.75rem;color:#3a4a5e;}
-.htag{background:#0d1420;border:1px solid #1e2a3d;color:#7a8aaa;font-size:.75rem;padding:.3rem .75rem;border-radius:2rem;cursor:pointer;transition:.2s;}
-.htag:hover{border-color:#3b82f6;color:#3b82f6;}
-.hero-stats{display:flex;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid #141c28;}
-.hs-n{display:block;font-size:1.8rem;font-weight:900;color:#3b82f6;}
-.hs-l{font-size:.72rem;color:#3a4a5e;}
+  .hero { margin-top:60px; padding:5rem 5% 4rem; background:radial-gradient(ellipse 60% 50% at 25% 50%, rgba(59,126,248,0.07), transparent); }
+  .hero-inner { max-width:700px; }
+  .hero-badge { display:inline-block; background:rgba(59,126,248,0.1); border:1px solid rgba(59,126,248,0.25); color:var(--blue); font-size:0.72rem; font-weight:600; padding:0.3rem 0.9rem; border-radius:20px; margin-bottom:1.5rem; }
+  .hero h1 { font-size:clamp(2.2rem,4.5vw,4.2rem); font-weight:900; line-height:1.05; letter-spacing:-0.03em; margin-bottom:1.2rem; }
+  .hero h1 em { color:var(--blue); font-style:normal; }
+  .hero p { color:var(--muted); font-size:0.95rem; line-height:1.75; max-width:520px; margin-bottom:2rem; }
+  .search-box { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1rem; display:grid; grid-template-columns:1fr 1fr auto; gap:0.75rem; margin-bottom:2rem; max-width:680px; }
+  .sf { display:flex; flex-direction:column; gap:0.3rem; }
+  .sf label { font-size:0.65rem; color:var(--muted); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
+  .sf input { background:transparent; border:none; color:var(--text); font-size:0.88rem; outline:none; }
+  .sf input::placeholder { color:#2d3f5e; }
+  .search-btn { background:var(--blue); color:#fff; border:none; padding:0.75rem 1.5rem; font-size:0.85rem; font-weight:700; border-radius:5px; cursor:pointer; white-space:nowrap; align-self:end; }
+  .popular-tags { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+  .tag-label { font-size:0.75rem; color:var(--muted); }
+  .pop-tag { background:var(--card); border:1px solid var(--border); color:var(--muted); font-size:0.75rem; padding:0.3rem 0.8rem; border-radius:20px; cursor:pointer; transition:0.2s; }
+  .pop-tag:hover { border-color:var(--blue); color:var(--blue); }
+  .hero-stats { display:flex; gap:3rem; margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border); }
+  .stat-n { display:block; font-size:1.7rem; font-weight:900; color:var(--blue); }
+  .stat-l { font-size:0.72rem; color:var(--muted); }
 
-.filter-bar{background:#0d1420;border-top:1px solid #141c28;border-bottom:1px solid #141c28;padding:.7rem 4vw;display:flex;gap:.6rem;overflow-x:auto;}
-.f-chip{background:transparent;border:1px solid #1e2a3d;color:#7a8aaa;padding:.35rem .9rem;border-radius:2rem;font-size:.75rem;cursor:pointer;white-space:nowrap;transition:.2s;}
-.f-chip:hover,.f-chip.active{background:rgba(59,130,246,.1);border-color:#3b82f6;color:#3b82f6;}
+  .filters { background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0.8rem 5%; display:flex; gap:0.6rem; overflow-x:auto; }
+  .filters::-webkit-scrollbar { display:none; }
+  .f-chip { background:transparent; border:1px solid var(--border); color:var(--muted); padding:0.38rem 0.9rem; border-radius:20px; font-size:0.78rem; white-space:nowrap; cursor:pointer; flex-shrink:0; transition:0.2s; }
+  .f-chip.active,.f-chip:hover { border-color:var(--blue); color:var(--blue); background:rgba(59,126,248,0.07); }
 
-section{padding:4.5rem 4vw;max-width:1280px;margin:0 auto;}
-.s-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;}
-.s-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#3a4a5e;margin-bottom:.4rem;}
-h2{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:900;letter-spacing:-.02em;}
-.see-all{color:#3b82f6;font-size:.82rem;text-decoration:none;font-weight:600;}
+  section { padding:4rem 5%; max-width:1200px; margin:0 auto; }
+  .sec-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; }
+  .sec-head h2 { font-size:clamp(1.3rem,2vw,1.8rem); font-weight:800; }
+  .sec-head a { font-size:0.82rem; color:var(--blue); }
 
-.jobs-list{display:flex;flex-direction:column;gap:1rem;}
-.job-card{background:#0d1420;border:1px solid #141c28;border-radius:.75rem;padding:1.5rem;display:flex;align-items:center;gap:1.5rem;cursor:pointer;transition:.25s;}
-.job-card:hover{border-color:#1e3a5f;background:#0f1825;}
-.job-logo{width:52px;height:52px;border-radius:.6rem;background:#141c28;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
-.job-main{flex:1;}
-.job-title{font-weight:700;font-size:1rem;margin-bottom:.25rem;}
-.job-company{font-size:.82rem;color:#7a8aaa;margin-bottom:.5rem;}
-.job-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
-.job-tag{background:#141c28;color:#7a8aaa;font-size:.68rem;padding:.18rem .55rem;border-radius:.3rem;}
-.job-right{text-align:right;flex-shrink:0;}
-.job-salary{font-weight:700;font-size:.95rem;color:#3b82f6;margin-bottom:.3rem;}
-.job-posted{font-size:.7rem;color:#3a4a5e;}
-.job-type{display:inline-block;background:rgba(59,130,246,.1);color:#3b82f6;font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:2rem;border:1px solid rgba(59,130,246,.2);margin-top:.35rem;}
-.job-type.remote{background:rgba(52,211,153,.1);color:#34d399;border-color:rgba(52,211,153,.2);}
+  .jobs-list { display:flex; flex-direction:column; gap:0.85rem; }
+  .job-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1.3rem 1.5rem; display:flex; align-items:center; gap:1.25rem; cursor:pointer; transition:0.2s; }
+  .job-card:hover { border-color:#1e3a6e; }
+  .company-logo { width:48px; height:48px; border-radius:8px; object-fit:cover; flex-shrink:0; }
+  .job-main { flex:1; min-width:0; }
+  .job-title { font-weight:700; font-size:0.97rem; margin-bottom:0.2rem; }
+  .job-company { font-size:0.8rem; color:var(--muted); margin-bottom:0.5rem; }
+  .job-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+  .job-tag { background:#0a1628; border:1px solid var(--border); color:var(--muted); font-size:0.68rem; padding:0.18rem 0.55rem; border-radius:3px; }
+  .job-right { text-align:right; flex-shrink:0; }
+  .job-salary { font-weight:700; color:var(--blue); font-size:0.92rem; margin-bottom:0.2rem; }
+  .job-time { font-size:0.68rem; color:var(--muted); margin-bottom:0.35rem; }
+  .job-type { display:inline-block; font-size:0.65rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:10px; background:rgba(59,126,248,0.1); color:var(--blue); border:1px solid rgba(59,126,248,0.2); }
+  .job-type.remote { background:rgba(34,197,94,0.1); color:#22c55e; border-color:rgba(34,197,94,0.2); }
 
-.comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
-.comp-card{background:#0d1420;border:1px solid #141c28;border-radius:.75rem;padding:1.5rem;text-align:center;transition:.25s;cursor:pointer;}
-.comp-card:hover{border-color:#1e3a5f;}
-.comp-icon{font-size:3rem;margin-bottom:.75rem;display:block;}
-.comp-name{font-weight:700;font-size:.95rem;margin-bottom:.25rem;}
-.comp-jobs{font-size:.75rem;color:#3b82f6;font-weight:600;}
-.comp-cat{font-size:.72rem;color:#3a4a5e;margin-top:.15rem;}
+  .companies-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+  .company-card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; transition:0.2s; }
+  .company-card:hover { border-color:#1e3a6e; }
+  .company-card img { width:44px; height:44px; border-radius:6px; object-fit:cover; flex-shrink:0; }
+  .c-name { font-weight:700; font-size:0.9rem; margin-bottom:0.15rem; }
+  .c-jobs { font-size:0.72rem; color:var(--blue); font-weight:600; }
 
-.cta-banner{background:linear-gradient(135deg,#0d1420,#0f1e38);border:1px solid #1e2a3d;border-radius:1rem;padding:3.5rem;text-align:center;max-width:1280px;margin:0 auto 4rem;}
-.cta-h{font-size:2rem;font-weight:900;margin-bottom:.75rem;}
-.cta-p{color:#7a8aaa;font-size:.95rem;margin-bottom:2rem;}
-.cta-btns{display:flex;justify-content:center;gap:1rem;}
+  .tips { background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:4rem 5%; }
+  .tips-inner { max-width:1200px; margin:0 auto; }
+  .tips-inner h2 { font-size:clamp(1.3rem,2vw,1.8rem); font-weight:800; margin-bottom:2rem; }
+  .tips-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+  .tip-card { padding:1.5rem; border-left:3px solid var(--blue); background:#0a1220; }
+  .tip-icon { font-size:1.8rem; margin-bottom:0.75rem; }
+  .tip-title { font-weight:700; font-size:0.95rem; margin-bottom:0.4rem; }
+  .tip-desc { font-size:0.83rem; color:var(--muted); line-height:1.65; }
 
-.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
-.tip-card{background:#0d1420;border:1px solid #141c28;border-radius:.75rem;padding:1.5rem;}
-.tip-icon{font-size:2rem;margin-bottom:.75rem;}
-.tip-title{font-weight:700;font-size:.95rem;margin-bottom:.4rem;}
-.tip-desc{font-size:.83rem;color:#7a8aaa;line-height:1.6;}
+  footer { padding:3rem 5% 1.2rem; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2.5rem; border-top:1px solid var(--border); }
+  .f-logo { font-size:1.1rem; font-weight:800; color:var(--blue); display:block; margin-bottom:0.7rem; }
+  footer p { font-size:0.83rem; color:var(--muted); line-height:1.7; }
+  .f-col h4 { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.9rem; }
+  .f-col ul { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .f-col a { font-size:0.83rem; color:#3d5278; transition:color 0.2s; }
+  .f-col a:hover { color:var(--blue); }
+  .f-bottom { border-top:1px solid var(--border); padding:1.2rem 5%; display:flex; justify-content:space-between; font-size:0.72rem; color:#3d5278; }
 
-footer{border-top:1px solid #141c28;padding:2.5rem 4vw 1.5rem;display:flex;justify-content:space-between;align-items:center;}
-.footer-logo{font-size:1.1rem;font-weight:900;}.footer-logo span{color:#3b82f6;}
-.footer-right{font-size:.78rem;color:#3a4a5e;}
-
-@media(max-width:900px){
-  .search-wrap{grid-template-columns:1fr;}
-  .comp-grid,.tips-grid{grid-template-columns:1fr 1fr;}
-  .job-right{display:none;}
-}
+  @media(max-width:768px) {
+    .nav-links { display:none; }
+    .hamburger { display:block; }
+    .search-box { grid-template-columns:1fr; }
+    .job-right { display:none; }
+    .companies-grid { grid-template-columns:1fr 1fr; }
+    .tips-grid { grid-template-columns:1fr; }
+    footer { grid-template-columns:1fr 1fr; }
+    .f-bottom { flex-direction:column; gap:0.4rem; }
+  }
+  @media(max-width:480px) {
+    .companies-grid { grid-template-columns:1fr; }
+    footer { grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">Hire<span>Hub</span></div>
+  <div class="logo">Work<span>India</span></div>
   <ul class="nav-links">
     <li><a href="#jobs">Find Jobs</a></li>
     <li><a href="#companies">Companies</a></li>
-    <li><a href="#">For Recruiters</a></li>
-    <li><a href="#">Blog</a></li>
+    <li><a href="#">Resume Tips</a></li>
+    <li><a href="#">Salary Guide</a></li>
   </ul>
   <div class="nav-right">
     <button class="btn-ghost">Log In</button>
     <button class="btn-blue">Post a Job</button>
   </div>
+  <div class="hamburger">☰</div>
 </nav>
 
-<section id="hero" style="max-width:none;">
+<div class="hero">
   <div class="hero-inner">
     <div class="hero-badge">🚀 10,000+ new jobs added this week</div>
     <h1>Find a Job You'll<br><em>Actually Love.</em></h1>
-    <p class="hero-p">Browse 50,000+ job listings from top companies across India. Filter by role, location, salary and work type — and apply in one click.</p>
-    <div class="search-wrap">
-      <div class="s-field"><div class="s-label">Job Title / Skill</div><input class="s-input" placeholder="e.g. Frontend Developer"/></div>
-      <div class="s-field"><div class="s-label">Location</div><input class="s-input" placeholder="e.g. Bengaluru, Remote"/></div>
-      <div class="s-field"><div class="s-label">Experience</div><input class="s-input" placeholder="e.g. Fresher, 1-3 yrs"/></div>
-      <button class="s-btn">Search Jobs</button>
+    <p>Browse 50,000+ job listings from top companies. Filter by role, salary, location and apply in one click.</p>
+    <div class="search-box">
+      <div class="sf"><label>Job Title / Skill</label><input placeholder="e.g. React Developer"></div>
+      <div class="sf"><label>Location</label><input placeholder="e.g. Delhi, Remote"></div>
+      <button class="search-btn">Search Jobs</button>
     </div>
-    <div class="hero-tags">
+    <div class="popular-tags">
       <span class="tag-label">Popular:</span>
-      <span class="htag">Frontend Developer</span>
-      <span class="htag">Data Analyst</span>
-      <span class="htag">Customer Support</span>
-      <span class="htag">React Developer</span>
-      <span class="htag">Remote Jobs</span>
+      <span class="pop-tag">Frontend Developer</span>
+      <span class="pop-tag">Data Analyst</span>
+      <span class="pop-tag">Customer Support</span>
+      <span class="pop-tag">Remote Jobs</span>
     </div>
     <div class="hero-stats">
-      <div><span class="hs-n">50K+</span><span class="hs-l">Live Jobs</span></div>
-      <div><span class="hs-n">8K+</span><span class="hs-l">Companies</span></div>
-      <div><span class="hs-n">2M+</span><span class="hs-l">Job Seekers</span></div>
+      <div><span class="stat-n">50K+</span><span class="stat-l">Live Jobs</span></div>
+      <div><span class="stat-n">8K+</span><span class="stat-l">Companies</span></div>
+      <div><span class="stat-n">2M+</span><span class="stat-l">Job Seekers</span></div>
     </div>
   </div>
-</section>
+</div>
 
-<div class="filter-bar">
+<div class="filters">
   <div class="f-chip active">All Jobs</div>
   <div class="f-chip">Remote</div>
   <div class="f-chip">Full Time</div>
-  <div class="f-chip">Part Time</div>
   <div class="f-chip">Internship</div>
   <div class="f-chip">Fresher</div>
   <div class="f-chip">IT & Tech</div>
   <div class="f-chip">Sales</div>
-  <div class="f-chip">Marketing</div>
   <div class="f-chip">Finance</div>
   <div class="f-chip">Design</div>
+  <div class="f-chip">Marketing</div>
 </div>
 
 <section id="jobs">
-  <div class="s-top"><div><div class="s-label">Latest Openings</div><h2>Jobs For You</h2></div><a href="#" class="see-all">View All Jobs →</a></div>
+  <div class="sec-head"><h2>Latest Job Openings</h2><a href="#">View all →</a></div>
   <div class="jobs-list">
     <div class="job-card">
-      <div class="job-logo">🏢</div>
+      <img class="company-logo" src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=100&q=80" alt="Tech company">
       <div class="job-main">
-        <div class="job-title">Frontend Developer — React</div>
+        <div class="job-title">Frontend Developer – React.js</div>
         <div class="job-company">TechNova Solutions · Bengaluru</div>
-        <div class="job-tags"><span class="job-tag">React</span><span class="job-tag">JavaScript</span><span class="job-tag">Tailwind CSS</span><span class="job-tag">0-2 yrs</span></div>
+        <div class="job-tags"><span class="job-tag">React</span><span class="job-tag">JavaScript</span><span class="job-tag">Tailwind CSS</span><span class="job-tag">0–2 yrs</span></div>
       </div>
-      <div class="job-right"><div class="job-salary">₹4L – ₹8L/yr</div><div class="job-posted">Posted 2 days ago</div><div class="job-type">Hybrid</div></div>
+      <div class="job-right"><div class="job-salary">₹4L – ₹8L/yr</div><div class="job-time">2 days ago</div><div class="job-type">Hybrid</div></div>
     </div>
     <div class="job-card">
-      <div class="job-logo">📊</div>
+      <img class="company-logo" src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=100&q=80" alt="Office">
       <div class="job-main">
-        <div class="job-title">Data Analyst — Power BI</div>
+        <div class="job-title">Data Analyst – Power BI & Excel</div>
         <div class="job-company">FinEdge Analytics · Mumbai</div>
-        <div class="job-tags"><span class="job-tag">Power BI</span><span class="job-tag">Excel</span><span class="job-tag">SQL</span><span class="job-tag">Python</span></div>
+        <div class="job-tags"><span class="job-tag">Power BI</span><span class="job-tag">SQL</span><span class="job-tag">Excel</span><span class="job-tag">Python</span></div>
       </div>
-      <div class="job-right"><div class="job-salary">₹3.5L – ₹6L/yr</div><div class="job-posted">Posted today</div><div class="job-type remote">Remote</div></div>
+      <div class="job-right"><div class="job-salary">₹3.5L – ₹6L/yr</div><div class="job-time">Today</div><div class="job-type remote">Remote</div></div>
     </div>
     <div class="job-card">
-      <div class="job-logo">🎧</div>
+      <img class="company-logo" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=100&q=80" alt="Support team">
       <div class="job-main">
         <div class="job-title">Customer Support Executive</div>
         <div class="job-company">CareConnect BPO · Delhi / Remote</div>
         <div class="job-tags"><span class="job-tag">Communication</span><span class="job-tag">CRM</span><span class="job-tag">Hindi + English</span><span class="job-tag">Freshers OK</span></div>
       </div>
-      <div class="job-right"><div class="job-salary">₹2.4L – ₹4L/yr</div><div class="job-posted">Posted 1 day ago</div><div class="job-type remote">Remote</div></div>
+      <div class="job-right"><div class="job-salary">₹2.4L – ₹4L/yr</div><div class="job-time">1 day ago</div><div class="job-type remote">Remote</div></div>
     </div>
     <div class="job-card">
-      <div class="job-logo">🌐</div>
+      <img class="company-logo" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=100&q=80" alt="Development team">
       <div class="job-main">
-        <div class="job-title">Full Stack Developer — MERN</div>
+        <div class="job-title">Full Stack Developer – MERN</div>
         <div class="job-company">BuildFast Tech · Hyderabad</div>
-        <div class="job-tags"><span class="job-tag">Node.js</span><span class="job-tag">MongoDB</span><span class="job-tag">React</span><span class="job-tag">1-3 yrs</span></div>
+        <div class="job-tags"><span class="job-tag">Node.js</span><span class="job-tag">MongoDB</span><span class="job-tag">React</span><span class="job-tag">1–3 yrs</span></div>
       </div>
-      <div class="job-right"><div class="job-salary">₹6L – ₹12L/yr</div><div class="job-posted">Posted 3 days ago</div><div class="job-type">Onsite</div></div>
+      <div class="job-right"><div class="job-salary">₹6L – ₹12L/yr</div><div class="job-time">3 days ago</div><div class="job-type">Onsite</div></div>
     </div>
   </div>
 </section>
 
 <section id="companies">
-  <div class="s-top"><div><div class="s-label">Top Hirers</div><h2>Companies Hiring Now</h2></div><a href="#" class="see-all">All Companies →</a></div>
-  <div class="comp-grid">
-    <div class="comp-card"><span class="comp-icon">🏢</span><div class="comp-name">TechNova Solutions</div><div class="comp-jobs">34 open roles</div><div class="comp-cat">Software · IT</div></div>
-    <div class="comp-card"><span class="comp-icon">📦</span><div class="comp-name">ShopFast India</div><div class="comp-jobs">21 open roles</div><div class="comp-cat">E-Commerce</div></div>
-    <div class="comp-card"><span class="comp-icon">🏦</span><div class="comp-name">FinEdge Analytics</div><div class="comp-jobs">18 open roles</div><div class="comp-cat">Finance · Fintech</div></div>
-    <div class="comp-card"><span class="comp-icon">🎧</span><div class="comp-name">CareConnect BPO</div><div class="comp-jobs">52 open roles</div><div class="comp-cat">BPO · Support</div></div>
+  <div class="sec-head"><h2>Top Companies Hiring Now</h2><a href="#">All companies →</a></div>
+  <div class="companies-grid">
+    <div class="company-card"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=100&q=80" alt="Tech company"><div><div class="c-name">TechNova</div><div class="c-jobs">34 open roles</div></div></div>
+    <div class="company-card"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=100&q=80" alt="Finance"><div><div class="c-name">FinEdge</div><div class="c-jobs">21 open roles</div></div></div>
+    <div class="company-card"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=100&q=80" alt="BPO"><div><div class="c-name">CareConnect</div><div class="c-jobs">52 open roles</div></div></div>
+    <div class="company-card"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=100&q=80" alt="StartUp"><div><div class="c-name">BuildFast</div><div class="c-jobs">18 open roles</div></div></div>
   </div>
 </section>
 
-<section>
-  <div class="s-top"><div><div class="s-label">Career Advice</div><h2>Tips to Get Hired Faster</h2></div></div>
-  <div class="tips-grid">
-    <div class="tip-card"><div class="tip-icon">📄</div><div class="tip-title">Build an ATS-Friendly Resume</div><div class="tip-desc">Use clear section headings, relevant keywords and simple formatting. Avoid tables and images that ATS cannot read.</div></div>
-    <div class="tip-card"><div class="tip-icon">🌐</div><div class="tip-title">Create a Portfolio Website</div><div class="tip-desc">Show your work online. A live portfolio link on your resume stands out more than a list of skills.</div></div>
-    <div class="tip-card"><div class="tip-icon">🤝</div><div class="tip-title">Network Actively on LinkedIn</div><div class="tip-desc">Connect with hiring managers, comment on posts and share your projects. 80% of jobs are filled via networking.</div></div>
-  </div>
-</section>
-
-<div class="cta-banner">
-  <div class="cta-h">Ready to Post a Job?</div>
-  <p class="cta-p">Reach 2 million+ active job seekers across India. Post your first job free — no credit card needed.</p>
-  <div class="cta-btns">
-    <button class="btn-blue" style="padding:.85rem 2rem;font-size:.9rem;">Post a Job — Free</button>
-    <button class="btn-ghost" style="padding:.85rem 2rem;font-size:.9rem;">View Plans</button>
+<div class="tips">
+  <div class="tips-inner">
+    <h2>Career Tips</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">📄</div><div class="tip-title">Write an ATS-Friendly Resume</div><div class="tip-desc">Use clear headings, relevant keywords and simple formatting so ATS software can read your resume easily.</div></div>
+      <div class="tip-card"><div class="tip-icon">🌐</div><div class="tip-title">Build a Portfolio Website</div><div class="tip-desc">A live portfolio link on your resume stands out more than a plain list of skills. Show your work online.</div></div>
+      <div class="tip-card"><div class="tip-icon">🤝</div><div class="tip-title">Network on LinkedIn</div><div class="tip-desc">80% of jobs are filled through connections. Connect with recruiters, share your work and stay visible.</div></div>
+    </div>
   </div>
 </div>
 
 <footer>
-  <div><div class="footer-logo">Hire<span>Hub</span></div><div style="font-size:.75rem;color:#3a4a5e;margin-top:.3rem;">Built by Akash Kumar · HTML & CSS</div></div>
-  <div class="footer-right">© 2024 HireHub. All rights reserved.</div>
+  <div><span class="f-logo">WorkIndia</span><p>Connecting job seekers with top employers across India since 2020.</p></div>
+  <div class="f-col"><h4>Jobs</h4><ul><li><a href="#">Browse Jobs</a></li><li><a href="#">Remote Jobs</a></li><li><a href="#">Internships</a></li></ul></div>
+  <div class="f-col"><h4>Employers</h4><ul><li><a href="#">Post a Job</a></li><li><a href="#">View Plans</a></li></ul></div>
+  <div class="f-col"><h4>Support</h4><ul><li><a href="#">Help Centre</a></li><li><a href="#">Contact Us</a></li></ul></div>
 </footer>
+<div class="f-bottom">
+  <span>© 2024 WorkIndia. All rights reserved.</span>
+  <span>Built by Akash Kumar</span>
+</div>
 
 </body>
 </html>
